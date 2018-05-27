@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        {{ date | formDate }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        var padDate = function (value) {
+            return value < 10 ? '0' + value : value
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                date: new Date()
+            },
+            filters: {
+                formDate(value) {
+                    let date = new Date(value)
+                    let year = date.getFullYear()
+                    let month = padDate(date.getMonth() + 1)
+                    let day = padDate(date.getDate())
+                    let hours = padDate(date.getHours())
+                    let minutes = padDate(date.getMinutes())
+                    let seconds = padDate(date.getSeconds())
+
+                    return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+                }
+            },
+            mounted: function () {
+                var _this = this
+                _this.timer = setInterval(function () {
+                    _this.date = new Date()
+                }, 1000)
+            },
+            beforeDestroy: function () {
+                if (this.timer) clearInterval(this.timer)
+            }
+        })
+    </script>
+</body>
+
+</html>
