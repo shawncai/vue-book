@@ -17,11 +17,15 @@ vue book study
 
 * 常用指令
 
-    ```javascript
+    ```javascript 
+        // 常用指令详解
+        v-cloak // 闪动数据的处理，常和css 搭配使用 [v-cloak]{display: none}
         v-on // 用来绑定事件监听器 语法糖: @
-        v-show // 显示 | 隐藏
-        v-if // if 判断
+        v-once // 渲染一次就不在修改，应该是缓存起来了
+        v-show // 显示 | 隐藏   
+        v-if v-else-if v-else // if 判断
         v-html // 解析html 并显示
+        v-for // for 循环  v-for="(list, index, key) in lists"
         v-pre // 显示原内容
         v-bind // 基本用途用来更新 HTML 上元素的属性  语法糖: :
         v-model // todo
@@ -55,3 +59,6 @@ vue book study
     :class="classes" /*可查看 27.html 查看详解*/
     ```
 
+* style 的使用和 class 的一毛一样。。[不常用]
+
+##### 4. 
