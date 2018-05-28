@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div :class="classes">classes 测试</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isActive: true,
+                error: null
+            },
+            computed: {
+                classes() {
+                    return {
+                        active: this.isActive && !this.error,
+                        // 如果是 - 连接的class 需要加上引号 _ 则不需要
+                        text_dec: true,
+                        'text-fail': this.error && this.error.type === 'fail'
+                    };
+                },
+                classes2() {
+                    // 复合使用
+                    return [
+                        'btn',
+                        {
+                            active: this.isActive && !this.error,
+                            text_dec: true,
+                            'text-fail': this.error && this.error.type === 'fail'
+                        }
+                    ]
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

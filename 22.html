@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app1"></div>
+    <div id="app2">
+        {{ reversedText }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        let app1 = new Vue({
+            el: '#app1',
+            data: {
+                text: '123,456'
+            }
+        })
+
+        let app2 = new Vue({
+            el: '#app2',
+            computed: {
+                reversedText: function () {
+                    return app1.text.split(',').reverse().join(',');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

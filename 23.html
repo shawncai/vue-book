@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h3>查看控制台的输出结果，就知道渲染的方式</h3>
+        <h5>{{ reversedText() }}</h5>
+        <h5>{{ now }}</h5>
+        <h5>{{ reversedText() }}</h5>
+        <h5>{{ now }}</h5>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                text: '123,456'
+            },
+            methods: {
+                reversedText() {
+                    console.log('function')
+                    return this.text.split(',').reverse().join(',')
+                }
+            },
+            computed: {
+                //  es6 的写法
+                now() {
+                    console.log('computed')
+                    return Date.now()
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
