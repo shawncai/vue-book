@@ -6,16 +6,16 @@ vue book study
 
 ##### 1. vue 指令
 
-* v-if 与 v-show 区别 : 
+1. v-if 与 v-show 区别 : 
     > 
     > v-if dom 内无内容
     >
     > v-show 只是隐藏了数据，实际上是会渲染的
 
-* v-html 与 v-pre 的使用：
+2. v-html 与 v-pre 的使用：
     > 担心 `xss` 攻击的话，就使用 v-pre 否则就使用 v-html
 
-* 常用指令
+3. 常用指令
 
     ```javascript 
         // 常用指令详解
@@ -47,7 +47,7 @@ vue book study
 
 > 主要根据v-bind 来展示class | style
 
-* class 的使用 [如果表达式过长或者逻辑相对复杂。尽量使用计算属性来完成相应功能]
+1. class 的使用 [如果表达式过长或者逻辑相对复杂。尽量使用计算属性来完成相应功能]
     ```javascript
     /*方式1 : 根据后面的值的布尔型决定是否显示前面的class, 可传入多个属性来动态切换 class*/
     :class="{'active': isActive, 'error': isError}" 
@@ -59,6 +59,43 @@ vue book study
     :class="classes" /*可查看 27.html 查看详解*/
     ```
 
-* style 的使用和 class 的一毛一样。。[不常用]
+2. style 的使用和 class 的一毛一样。。[不常用]
 
-##### 4. 
+##### 4. 方法事件与修饰符 
+
+> 事件交给 v-on 来处理。
+>
+> 例如： v-on:click [也可以写成 @click ，这样比较常用] :绑定点击事件; @keyup.13='submit' 绑定enter键来提交
+> 
+
+1. @click 的方法不传参数的时候不需要写 () , 默认传入的是 `event`对象 例如：
+
+    ```
+    <button @click="handleAdd">+1</button>
+    <button @click="handleAdd(10)">+10</button>
+    ```
+2. 修饰符
+
+    常用修饰符：
+    * .stop
+    * .prevent
+    * .capture
+    * .self
+    * once
+
+    还可以绑定按键 | 组合按键
+    * .enter
+    * .tab
+    * delete
+    * .esc
+    * .space
+    * .up
+    * .down
+    * .left
+    * .right
+
+    组合键：
+    .ctrl
+    .alt
+    .shift
+    .meta (win键 | Command键)
