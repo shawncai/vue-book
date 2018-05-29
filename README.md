@@ -25,7 +25,7 @@ vue book study
         v-show // 显示 | 隐藏   
         v-if v-else-if v-else // if 判断
         v-html // 解析html 并显示
-        v-for // for 循环  v-for="(list, index, key) in lists"
+        v-for // for 循环  v-for="(list, key, index) in lists"
         v-pre // 显示原内容
         v-bind // 基本用途用来更新 HTML 上元素的属性  语法糖: :
         v-model // todo
