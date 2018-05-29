@@ -3,20 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>demo</title>
+    <title>购物车扩展1</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
     <style>
         [v-cloak] {
             display: none
-        }
-
-        .fl {
-            float: left;
-        }
-
-        .mb {
-            margin: 0 auto;
         }
     </style>
 </head>
@@ -41,9 +33,9 @@
                         </tr>
                         <tr v-for="(goods, key, index) in goodsLists">
                             <td class="text-center col-md-1 ">
-                                <input type="checkbox" v-model='checkedIds' :value="goods.id" :checked="true" />
+                                <input type="checkbox" v-model='checkedIds' :value="goods.id" />
                             </td>
-                            <td class="text-center col-md-1">
+                            <td class=" text-center col-md-1 ">
                                 {{ key+1 }}
                             </td>
                             <td class="text-center col-md-2 ">
@@ -52,36 +44,37 @@
                             <td class="text-center col-md-2 ">
                                 {{ goods.price }}
                             </td>
-                            <td class="col-md-3 text-center">
-                                <button class="btn btn-sm btn-info" @click="cartReduce(goods)" :disable="goods.count <= 1">-</button>
+                            <td class="col-md-3 text-center ">
+                                <button class="btn btn-sm btn-info " @click="cartReduce(goods) " :disable="goods.count
+                                    <=1 ">-</button>
                                 <span class='text-center'>&nbsp;&nbsp;{{ goods.count }}&nbsp;&nbsp;</span>
-                                <button class="btn btn-sm btn-info" @click="cartAdd(goods)">+</button>
+                                <button class="btn btn-sm btn-info " @click="cartAdd(goods) ">+</button>
                             </td>
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-danger">删除</button>
+                            <td class="text-center ">
+                                <button class="btn btn-sm btn-danger " @click="cartDestroy(index, goods.id) ">删除</button>
                             </td>
                         </tr>
                     </table>
                     <br>
                     <div>
-                        <input type="checkbox" class="pull-left" :checked="checkAll" @click="toggleChoose"> 全选
-                        <button class="btn btn-danger pull-right" @click="showPayInfo">去支付 {{ price }}</button>
+                        <input type="checkbox" class="pull-left " :checked="checkAll" @click="toggleChoose "> 全选
+                        <button class="btn btn-danger pull-right " @click="showPayInfo ">去支付 {{ price }}</button>
                     </div>
                 </div>
                 <div v-else>
-                    <h1 class="text-center">购物车为空</h1>
+                    <h1 class="text-center ">购物车为空</h1>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js "></script>
     <script>
         let vm = new Vue({
             el: '#app',
             data: {
                 goodsLists: [{
                         id: 1,
-                        name: "香蕉🍌",
+                        name: "香蕉🍌 ",
                         price: 19.9,
                         count: 1
                     },
@@ -100,8 +93,6 @@
                 ],
                 checkedIds: [],
                 all: [],
-                // 默认选中
-                checkAll: true
             },
             created: function () {
                 let ids = []
@@ -123,6 +114,9 @@
                         }
                     }
                     return price.toFixed(2)
+                },
+                checkAll() {
+                    return this.all.sort().toString() == this.checkedIds.sort().toString()
                 }
             },
             methods: {
@@ -132,8 +126,6 @@
                     } else {
                         this.checkedIds = this.all
                     }
-
-                    this.checkAll = !this.checkAll
                 },
                 cartReduce(goods) {
                     if (goods.count <= 1) return
@@ -142,17 +134,21 @@
                 cartAdd(goods) {
                     goods.count += 1
                 },
+                cartDestroy(index, id) {
+                    this.goodsLists.splice(index, 1);
+                    let checkIndex = this.checkedIds.indexOf(id);
+                    let allIndex = this.all.indexOf(id);
+                    if (checkIndex !== -1)
+                        this.checkedIds.splice(checkIndex, 1)
+                    if (allIndex !== -1)
+                        this.all.splice(allIndex, 1)
+                },
                 showPayInfo() {
-                    alert('需要支付的总金额为：' + this.price)
-                }
-            },
-            watch: {
-                checkedIds: function (val) {
-                    if (val.sort().toString() == this.all.sort().toString()) {
-                        this.checkAll = true
-                    } else {
-                        this.checkAll = false
+                    if (this.price > 0) {
+                        alert('需要支付的总金额为：' + this.price)
+                        return
                     }
+                    alert('暂未选择要购买的内容')
                 }
             }
         })
