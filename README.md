@@ -84,7 +84,7 @@ vue book study
     * once
 
     还可以绑定按键 | 组合按键
-    * .enter
+    * .enter @click.enter
     * .tab
     * delete
     * .esc

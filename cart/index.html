@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
+    <style>
+        [v-cloak] {
+            display: none
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .mb {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" role="main" v-if="goodsLists.length">
+                    <h2 class="text-center">购物车示例</h2>
+                    <br>
+                    <table class="table">
+                        <tr>
+                            <th class="text-center">
+
+                            </th>
+                            <th class="text-center">序号</th>
+                            <th class="text-center">商品名称</th>
+                            <th class="text-center">商品单价</th>
+                            <th class="text-center">商品数量</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                        <tr v-for="(goods, key, index) in goodsLists">
+                            <td class="text-center col-md-1 ">
+                                <input type="checkbox" v-model='checkedIds' :value="goods.id" :checked="true" />
+                            </td>
+                            <td class="text-center col-md-1">
+                                {{ key+1 }}
+                            </td>
+                            <td class="text-center col-md-2 ">
+                                {{ goods.name }}
+                            </td>
+                            <td class="text-center col-md-2 ">
+                                {{ goods.price }}
+                            </td>
+                            <td class="col-md-3 text-center">
+                                <button class="btn btn-sm btn-info" @click="cartReduce(goods)" :disable="goods.count <= 1">-</button>
+                                <span class='text-center'>&nbsp;&nbsp;{{ goods.count }}&nbsp;&nbsp;</span>
+                                <button class="btn btn-sm btn-info" @click="cartAdd(goods)">+</button>
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-danger">删除</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <div>
+                        <input type="checkbox" class="pull-left" :checked="checkAll" @click="toggleChoose"> 全选
+                        <button class="btn btn-danger pull-right" @click="showPayInfo">去支付 {{ price }}</button>
+                    </div>
+                </div>
+                <div v-else>
+                    <h1 class="text-center">购物车为空</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                goodsLists: [{
+                        id: 1,
+                        name: "香蕉🍌",
+                        price: 19.9,
+                        count: 1
+                    },
+                    {
+                        id: 2,
+                        name: '苹果🍎',
+                        price: 5.5,
+                        count: 1
+                    },
+                    {
+                        id: 3,
+                        name: '凤梨🍍',
+                        price: 11.7,
+                        count: 1
+                    }
+                ],
+                checkedIds: [],
+                all: [],
+                // 默认选中
+                checkAll: true
+            },
+            created: function () {
+                let ids = []
+                for (let i in this.goodsLists) {
+                    let goods = this.goodsLists[i]
+                    ids.push(goods.id);
+                }
+                // 默认选择所有的
+                this.checkedIds = ids;
+                this.all = ids;
+            },
+            computed: {
+                price() {
+                    let price = 0
+                    for (let i in this.goodsLists) {
+                        let goods = this.goodsLists[i]
+                        if (this.checkedIds.indexOf(goods.id) !== -1) {
+                            price += goods.price * goods.count
+                        }
+                    }
+                    return price.toFixed(2)
+                }
+            },
+            methods: {
+                toggleChoose(event) {
+                    if (this.checkAll) {
+                        this.checkedIds = []
+                    } else {
+                        this.checkedIds = this.all
+                    }
+
+                    this.checkAll = !this.checkAll
+                },
+                cartReduce(goods) {
+                    if (goods.count <= 1) return
+                    goods.count -= 1
+                },
+                cartAdd(goods) {
+                    goods.count += 1
+                },
+                showPayInfo() {
+                    alert('需要支付的总金额为：' + this.price)
+                }
+            },
+            watch: {
+                checkedIds: function (val) {
+                    if (val.sort().toString() == this.all.sort().toString()) {
+                        this.checkAll = true
+                    } else {
+                        this.checkAll = false
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
