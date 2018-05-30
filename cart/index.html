@@ -31,12 +31,12 @@
                             <th class="text-center">商品数量</th>
                             <th class="text-center">操作</th>
                         </tr>
-                        <tr v-for="(goods, key, index) in goodsLists">
+                        <tr v-for="(goods, index) in goodsLists">
                             <td class="text-center col-md-1 ">
                                 <input type="checkbox" v-model='checkedIds' :value="goods.id" />
                             </td>
                             <td class=" text-center col-md-1 ">
-                                {{ key+1 }}
+                                {{ index+1 }}
                             </td>
                             <td class="text-center col-md-2 ">
                                 {{ goods.name }}
@@ -135,14 +135,12 @@
                     goods.count += 1
                 },
                 cartDestroy(index, id) {
-                    this.goodsLists.splice(index, 1);
                     let checkIndex = this.checkedIds.indexOf(id);
+                    this.goodsLists.splice(index, 1);
                     let allIndex = this.all.indexOf(id);
                     if (checkIndex !== -1)
                         this.checkedIds.splice(checkIndex, 1)
-                    if (allIndex !== -1)
-                        this.all.splice(allIndex, 1)
-                },
+                } ,
                 showPayInfo() {
                     if (this.price > 0) {
                         alert('需要支付的总金额为：' + this.price)
