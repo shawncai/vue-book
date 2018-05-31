@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <input type="text" @input="handleInput" placeholder="输入...">
+        <p>输入的内容： {{ message }}</p>
+
+        <h5>单选按钮</h5>
+        <input type="radio" v-model="picked" value="html" id="html">
+        <label for="html">HTML</label>
+        <input type="radio" v-model="picked" value="js" id="js">
+        <label for="js">Javascript</label>
+        <input type="radio" v-model="picked" value="css" id="css">
+        <label for="css">CSS</label>
+
+        <h5>复选框</h5>
+        <input type="checkbox" v-model="check" value="html" id="html">
+        <label for="html">html</label>
+        <input type="checkbox" v-model="check" value="css" id="css">
+        <label for="css">css</label>
+        <input type="checkbox" v-model="check" value="js" id="js">
+        <label for="js">js</label>
+
+        <h5>下拉框</h5>
+        <select v-model="selected" id="">
+            <option v-for="option in options" :value="option.value">{{ option.name }}</option>
+        </select>
+        <p>选中值为： {{selected}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                message: '',
+                picked: 'js',
+                check: ['js', 'css'],
+                options: [{
+                        name: 'html',
+                        value: 'html'
+                    },
+                    {
+                        name: 'css',
+                        value: 'css'
+                    },
+                    {
+                        name: 'js',
+                        value: 'js'
+                    }
+                ],
+                selected: 'html'
+            },
+            methods: {
+                handleInput(e) {
+                    this.message = e.target.value
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

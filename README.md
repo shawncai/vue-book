@@ -74,7 +74,7 @@ vue book study
     <button @click="handleAdd">+1</button>
     <button @click="handleAdd(10)">+10</button>
     ```
-2. 修饰符
+2. v-on 修饰符
 
     常用修饰符：
     * .stop
@@ -84,18 +84,59 @@ vue book study
     * once
 
     还可以绑定按键 | 组合按键
-    * .enter @click.enter
+    * .enter 回车
     * .tab
     * delete
-    * .esc
-    * .space
-    * .up
-    * .down
-    * .left
-    * .right
+    * .esc 
+    * .space 空格
+    * .up 上
+    * .down 下
+    * .left 左
+    * .right 右
 
     组合键：
-    .ctrl
-    .alt
-    .shift
-    .meta (win键 | Command键)
+    * .ctrl
+    * .alt
+    * .shift
+    * .meta (win键 | Command键)
+
+3. v-model 修饰符
+    * .lazy 在change事件中同步
+    * .number 将输入的内容转化为 Number 类型
+    * .trim 过滤首尾的空格
+    * 自定义组件
+
+4. 数组更新详解
+
+    改变数组
+    * push() html
+    * pop()
+    * shift()
+    * unshift()
+    * splice()
+    * sort()
+    * reverse()
+
+     不改变数组
+     * filter() 
+     * concat()
+     * slice()
+
+##### 5. 组件知识点
+
+> 组件的作用：提高重用性，让代码可以复用
+
+1. props
+    * `DOM` 模板中使用短横线 '`-`', `props` 中使用驼峰法
+    * `props` 可以添加类型 [`String`、`Number`、`Boolean`、`Object`、`Array`、`Function`、自定义]、默认值
+    * `props` 验证类型失败后只会在控制台中抛出一个警告而已
+    * `v-bind` 可以动态的绑定数据，当父级数据修改，来传递子组件
+    * 如果你要直接传递数字、布尔值、数组、对象，而且不使用 `v-bind` , 传递的仅仅是字符串
+    * 根据单项数据流的特性，最好是在 `props` 后,初始化一条数据。当需要修改数据时使用计算属性
+
+2. 组件间的通信
+
+    > 组件通信分为：父子组件通信、兄弟组件通信、跨级组件通信三种
+
+    * 子组件传给父组件 this.$emit('name', value)
+    * 

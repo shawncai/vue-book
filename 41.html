@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>数组更新示例</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div>
+            <button class="btn btn-info" @click="push">PUSH</button>
+            {{ books }}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                books: {
+                    text: '速记测试'
+                }
+            },
+            methods: {
+                push() {
+                    this.books.push({
+                        name: 'Steven Jobs'
+                    })
+                    console.log(this.books)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
