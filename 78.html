@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>绑定</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <p>总数：{{ total }}</p>
+        <my-component v-model="total"></my-component>
+        <button @click="totalReduce">-</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        Vue.component('my-component', {
+            props: ['value'],
+            template: "<input :value='value' @input='updateValue'>",
+            methods: {
+                updateValue(event) {
+                    this.$emit('input', event.target.value)
+                }
+            }
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                total: 10
+            },
+            methods: {
+                totalReduce() {
+                    this.total--
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
