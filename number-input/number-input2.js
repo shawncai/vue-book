@@ -13,6 +13,10 @@ Vue.component('number-input', {
             type: Number,
             default: Infinity
         },
+        step: {
+            type: Number,
+            default: Infinity
+        },
         value: {
             type: Number,
             default: 0
@@ -26,8 +30,7 @@ Vue.component('number-input', {
     </div>',
     data: function () {
         return {
-            currentValue: this.value,
-            step: 10
+            currentValue: this.value
         }
     },
     watch: {
@@ -71,11 +74,17 @@ Vue.component('number-input', {
         },
         handleDown() {
             if (this.currentValue <= this.min) return
-            this.currentValue--
+            if ((this.currentValue - this.step) <= this.min) {
+                this.currentValue = this.min
+            }
+            this.currentValue -= this.step
         },
         handleUp() {
             if (this.currentValue >= this.max) return
-            this.currentValue++
+            if ((this.currentValue + this.step) >= this.max) {
+                this.currentValue = this.max
+            }
+            this.currentValue += this.step
         },
         updateValue(val) {
             if (val >= this.max) val = this.max

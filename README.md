@@ -158,3 +158,10 @@ vue book study
     * 动态组件
     * 异步组件
     * 其他： `$nextTick` `X-Templates` `$mount` [手动挂载实例]
+
+5. 组件示例：
+    * [106 练习1的页面](./number-input/index.html)
+    * [106 练习2的页面](./number-input/index2.html)
+    * [117 基础]()
+    * [117 练习1]()
+    * [117 练习2]()

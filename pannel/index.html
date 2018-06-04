@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>number input</title>
+    <title>标签页组件</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/x-icon">
     <style>
@@ -15,12 +15,22 @@
 
 <body>
     <div id="app" v-cloak>
-        <number-input :min=1 :max=1000 v-model="value"></number-input>
+        <table v-model="activeKey">
+            <pane label="标签一" name="1">标签一的内容</pane>
+            <pane label="标签二" name="2">标签二的内容</pane>
+            <pane label="标签三" name="3">标签三的内容</pane>
+        </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src='./number-input.js'></script>
-    <script src='./index.js'></script>
+    <script src='pane.js'></script>
+    <script src='tabs.js'></script>
     <script>
+        new Vue({
+            el: '#app',
+            data: {
+                activeKey: '1'
+            }
+        })
     </script>
 </body>
 
