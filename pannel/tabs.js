@@ -12,7 +12,7 @@ Vue.component('tabs', {
     },
     data: function () {
         return {
-            currentValue = this.value,
+            currentValue: this.value,
             navList: []
         }
     },
@@ -54,7 +54,7 @@ Vue.component('tabs', {
             })
         },
         handleChange(index) {
-            let nav = this.navList(index)
+            let nav = this.navList[index]
             let name = nav.name
             this.currentValue = name
             this.$emit('input', name)
